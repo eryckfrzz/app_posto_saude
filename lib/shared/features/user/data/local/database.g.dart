@@ -99,6 +99,8 @@ class _$AppDatabase extends AppDatabase {
             'CREATE TABLE IF NOT EXISTS `user` (`cpf` TEXT NOT NULL, `name` TEXT NOT NULL, `phone` INTEGER NOT NULL, `agentCpf` TEXT, PRIMARY KEY (`cpf`))');
         await database.execute(
             'CREATE TABLE IF NOT EXISTS `agent` (`cpf` TEXT NOT NULL, `name` TEXT NOT NULL, `email` TEXT NOT NULL, `password` TEXT NOT NULL, PRIMARY KEY (`cpf`))');
+        await database.execute(
+            'CREATE TABLE IF NOT EXISTS `record` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `birthday` TEXT NOT NULL, `gender` TEXT NOT NULL, `moreInfo` TEXT NOT NULL, `userCpf` TEXT NOT NULL, FOREIGN KEY (`userCpf`) REFERENCES `user` (`cpf`) ON UPDATE NO ACTION ON DELETE CASCADE)');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -126,13 +128,26 @@ class _$DatabaseDao extends DatabaseDao {
 
   @override
   Future<List<UserEntity>> getByAgentCpf(String agentCpf) async {
-    return _queryAdapter.queryList('Select * from user WHERE agentCpf = ?1',
+    return _queryAdapter.queryList('SELECT * FROM user WHERE agentCpf = ?1',
         mapper: (Map<String, Object?> row) => UserEntity(
             row['agentCpf'] as String?,
             name: row['name'] as String,
             cpf: row['cpf'] as String,
             phone: row['phone'] as int),
         arguments: [agentCpf]);
+  }
+
+  @override
+  Future<List<RecordEntity>> getRecordsByUserCpf(String cpf) async {
+    return _queryAdapter.queryList('SELECT * FROM record WHERE Usercpf = ?1',
+        mapper: (Map<String, Object?> row) => RecordEntity(
+            id: row['id'] as int,
+            name: row['name'] as String,
+            birthday: row['birthday'] as String,
+            gender: row['gender'] as String,
+            moreInfo: row['moreInfo'] as String,
+            userCpf: row['userCpf'] as String),
+        arguments: [cpf]);
   }
 
   @override
