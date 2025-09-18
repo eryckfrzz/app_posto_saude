@@ -1,7 +1,7 @@
 import 'package:floor/floor.dart';
 
 @Entity(tableName: 'user')
-class User {
+class UserEntity {
   @primaryKey
   String cpf;
   String name;
@@ -10,5 +10,5 @@ class User {
   @ColumnInfo(name: 'agentCpf')
   final String? agentCpf;
 
-  User(this.agentCpf, {required this.name, required this.cpf, required this.phone});
+  UserEntity(this.agentCpf, {required this.name, required this.cpf, required this.phone});
 }

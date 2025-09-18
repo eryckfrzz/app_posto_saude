@@ -1,35 +1,15 @@
 class User {
   String cpf;
   String name;
-  String birthday;
-  String gender;
-  String moreInfo;
+  int phone;
 
-  User({
-    required this.cpf,
-    required this.name,
-    required this.birthday,
-    required this.gender,
-    required this.moreInfo,
-  });
+  User({required this.cpf, required this.name, required this.phone});
 
   Map<String, dynamic> toJson() {
-    return {
-      'name': name,
-      'birthday': birthday,
-      'gender': gender,
-      'moreInfo': moreInfo,
-      'cpf': cpf
-    };
+    return {'name': name, 'cpf': cpf, 'phone': phone};
   }
 
   factory User.fromJson(Map<String, dynamic> json) {
-    return User(
-      name: json['name'],
-      birthday: json['birthday'],
-      gender: json['gender'],
-      moreInfo: json['moreInfo'],
-      cpf: json['cpf']
-    );
+    return User(name: json['name'], cpf: json['cpf'], phone: json['phone']);
   }
 }

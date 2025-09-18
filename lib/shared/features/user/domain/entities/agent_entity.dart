@@ -1,14 +1,14 @@
 import 'package:floor/floor.dart';
 
 @Entity(tableName: 'agent')
-class Agent {
+class AgentEntity {
   @primaryKey
   String cpf;
   String name;
   String email;
   String password;
 
-  Agent({
+  AgentEntity({
     required this.cpf,
     required this.name,
     required this.email,

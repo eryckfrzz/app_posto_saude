@@ -125,9 +125,10 @@ class _$DatabaseDao extends DatabaseDao {
   final QueryAdapter _queryAdapter;
 
   @override
-  Future<List<User>> getByAgentCpf(String agentCpf) async {
+  Future<List<UserEntity>> getByAgentCpf(String agentCpf) async {
     return _queryAdapter.queryList('Select * from user WHERE agentCpf = ?1',
-        mapper: (Map<String, Object?> row) => User(row['agentCpf'] as String?,
+        mapper: (Map<String, Object?> row) => UserEntity(
+            row['agentCpf'] as String?,
             name: row['name'] as String,
             cpf: row['cpf'] as String,
             phone: row['phone'] as int),
