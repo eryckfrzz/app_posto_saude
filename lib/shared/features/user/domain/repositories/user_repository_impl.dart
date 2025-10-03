@@ -17,10 +17,4 @@ class UserRepositoryImpl implements UserRepository {
   Future<List<RecordEntity>> getRecordsByUserCpf(String cpf) {
     return databaseDao.getRecordsByUserCpf(cpf);
   }
-
-  @override
-  Future<AgentEntity> registerAgent(AgentEntity agent) {
-    // TODO: implement registerAgent
-    throw UnimplementedError();
-  }
 }

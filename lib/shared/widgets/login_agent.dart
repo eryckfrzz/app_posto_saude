@@ -1,21 +1,24 @@
-import 'package:app_posto/shared/features/user/data/models/user.dart';
-import 'package:app_posto/shared/features/user/data/remote/user_service_impl.dart';
+import 'package:app_posto/shared/features/user/data/models/agent.dart';
+import 'package:app_posto/shared/features/user/data/remote/agent_service_impl.dart';
 import 'package:flutter/material.dart';
 
-class Login extends StatelessWidget {
-  const Login({super.key});
+class LoginAgent extends StatelessWidget {
+  const LoginAgent({super.key});
 
   @override
   Widget build(BuildContext context) {
     TextEditingController _cpfController = TextEditingController();
     TextEditingController _nameController = TextEditingController();
-    TextEditingController _phoneController = TextEditingController();
+    TextEditingController _emailController = TextEditingController();
+    TextEditingController _passwordController = TextEditingController();
 
     final String cpf = _cpfController.text;
     final String name = _nameController.text;
-    final String phone = _phoneController.text;
+    final String email = _emailController.text;
+    final String password = _passwordController.text;
+    final String agentCode = "AGENT123"; // Código fixo para o agente
 
-    final _service = UserServiceImpl();
+    final _service = AgentServiceImpl();
 
     void _verifyCpf() {
       // Remove caracteres não numéricos
@@ -66,19 +69,22 @@ class Login extends StatelessWidget {
     }
 
     Future<void> _handleRegister() async {
-      if (cpf.isEmpty || name.isEmpty || phone.isEmpty) {
+      if (cpf.isEmpty || name.isEmpty || email.isEmpty || password.isEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Por favor, preencha todos os campos!')),
         );
       }
 
-      final User? registerdUser = await _service.registerUser(
-        cpf: cpf,
-        name: name,
-        phone: phone,
-      );
+      final Agent? registerAgent = await _service
+        .registerAgent(
+          cpf: cpf,
+          name: name,
+          email: email,
+          password: password,
+          agentCode: agentCode,
+        );
 
-      if (registerdUser == null) {
+      if (registerAgent == null) {
         ScaffoldMessenger.of(
           context,
         ).showSnackBar(SnackBar(content: Text('Algum campo está inválido!')));
@@ -94,7 +100,7 @@ class Login extends StatelessWidget {
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: Icon(Icons.arrow_back, color: Colors.white,),
+            icon: Icon(Icons.arrow_back, color: Colors.white),
           ),
         ],
       ),
@@ -102,7 +108,7 @@ class Login extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            SizedBox(height: 40),
+            SizedBox(height: 30),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -113,7 +119,7 @@ class Login extends StatelessWidget {
                   ),
                   width: 90,
                   height: 90,
-                  child: Icon(Icons.person, size: 80, color: Colors.black),
+                  child: Icon(Icons.admin_panel_settings, size: 80, color: Colors.black),
                 ),
               ],
             ),
@@ -130,7 +136,7 @@ class Login extends StatelessWidget {
               ],
             ),
 
-            SizedBox(height: 40),
+            SizedBox(height: 30),
 
             TextFormField(
               controller: _cpfController,
@@ -155,7 +161,7 @@ class Login extends StatelessWidget {
               },
             ),
 
-            SizedBox(height: 40),
+            SizedBox(height: 30),
 
             TextFormField(
               controller: _nameController,
@@ -176,13 +182,13 @@ class Login extends StatelessWidget {
               ),
             ),
 
-            SizedBox(height: 40),
+            SizedBox(height: 30),
 
             TextFormField(
-              controller: _phoneController,
+              controller: _emailController,
               cursorColor: Colors.black,
               decoration: InputDecoration(
-                labelText: 'Digite seu telefone',
+                labelText: 'Digite seu e-mail',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(13)),
                 ),
@@ -197,7 +203,49 @@ class Login extends StatelessWidget {
               ),
             ),
 
-            SizedBox(height: 100),
+            SizedBox(height: 30,),
+
+            TextFormField(
+              controller: _emailController,
+              cursorColor: Colors.black,
+              decoration: InputDecoration(
+                labelText: 'Digite sua senha',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(13)),
+                ),
+
+                fillColor: Colors.white,
+                filled: true,
+                floatingLabelStyle: TextStyle(color: Colors.transparent),
+
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(13)),
+                ),
+              ),
+            ),
+
+            SizedBox(height: 30,),
+
+            TextFormField(
+              controller: _emailController,
+              cursorColor: Colors.black,
+              decoration: InputDecoration(
+                labelText: 'Digite seu código de agente',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(13)),
+                ),
+
+                fillColor: Colors.white,
+                filled: true,
+                floatingLabelStyle: TextStyle(color: Colors.transparent),
+
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(13)),
+                ),
+              ),
+            ),
+
+            SizedBox(height: 40),
 
             ElevatedButton(
               onPressed: () {

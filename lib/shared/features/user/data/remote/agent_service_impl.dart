@@ -9,6 +9,8 @@ import 'package:dio/dio.dart';
 class AgentServiceImpl implements AgentServiceDao {
   final Dio dio = Dio();
 
+  final String code = 'AGENT1234';
+
   @override
   Future<List<Agent?>> getAllAgents() async {
     try {
@@ -54,7 +56,7 @@ class AgentServiceImpl implements AgentServiceDao {
         },
       );
 
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200 && agentCode == code) {
         print('Agente registrado com suecsso!');
 
         Map<String, dynamic> map = json.decode(response.data);
