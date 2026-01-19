@@ -5,9 +5,10 @@ class Register extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final buttonWidth = MediaQuery.of(context).size.width * 0.9;
     return Scaffold(
-      backgroundColor: Colors.green[200],
-      appBar: AppBar(backgroundColor: Colors.green[200]),
+      backgroundColor: Colors.white,
+      appBar: AppBar(backgroundColor: Colors.white),
       body: Column(
         children: [
           SizedBox(height: 60),
@@ -17,9 +18,9 @@ class Register extends StatelessWidget {
               color: Colors.green,
               shape: BoxShape.circle,
             ),
-            height: 120,
-            width: 120,
-            child: Icon(Icons.app_registration, color: Colors.white, size: 60),
+            height: 180,
+            width: 180,
+            child: Image.asset('assets/images/logo.png'),
           ),
 
           SizedBox(height: 60),
@@ -28,8 +29,8 @@ class Register extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Seja Bem-Vindo(a) Ao Agenda Fácil',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                'Bem-vindo(a) ao Posto \n     de Saúde Digital',
+                style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
               ),
             ],
           ),
@@ -40,55 +41,85 @@ class Register extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                '            Faça de maneira rápida e segura\no registro da sua ficha para consulta médica!',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                'Selecione seu perfil para continuar',
+                style: TextStyle(fontSize: 18),
               ),
             ],
           ),
 
-          SizedBox(height: 80),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/loginUser');
-            },
-            child: Text(
-              'Sou paciente',
-              style: TextStyle(color: Colors.white, fontSize: 18),
-            ),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.green,
-              padding: EdgeInsets.symmetric(vertical: 16, horizontal: 104),
+          SizedBox(height: 40),
+          SizedBox(
+            height: 60,
+            width: buttonWidth,
+            child: ElevatedButton.icon(
+              onPressed: () {
+                Navigator.pushNamed(context, '/loginUser');
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.teal[700],
+                foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              icon: const Icon(Icons.person, size: 30),
+              label: const Text("Sou paciente", style: TextStyle(fontSize: 22)),
             ),
           ),
 
-          SizedBox(height: 40),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/loginAgent');
-            },
-            child: Text(
-              'Sou agente de saúde',
-              style: TextStyle(color: Colors.white, fontSize: 18),
-            ),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.green,
-              padding: EdgeInsets.symmetric(vertical: 16, horizontal: 73),
+          SizedBox(height: 25),
+
+          SizedBox(
+            height: 60,
+            width: buttonWidth,
+            child: ElevatedButton.icon(
+              onPressed: () {
+                Navigator.pushNamed(context, '/loginAgent');
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.teal[700],
+                foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              
+              icon: Icon(Icons.medical_services_outlined, size: 30),
+              label: const Text(
+                'Sou agente de saúde',
+                style: TextStyle(fontSize: 22),
+              ),
             ),
           ),
 
-          SizedBox(height: 40),
+          SizedBox(height: 25),
 
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/acessibility');
-            },
-            child: Text(
-              'Opções de acessibilidade',
-              style: TextStyle(color: Colors.white, fontSize: 18),
-            ),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.green,
-              padding: EdgeInsets.symmetric(vertical: 16, horizontal: 50),
+          SizedBox(
+            height: 60,
+            width: buttonWidth,
+            child: OutlinedButton.icon(
+              onPressed: () {
+                Navigator.pushNamed(context, '/acessibility');
+              },
+              style: OutlinedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                side: BorderSide(
+                  color: Theme.of(context).colorScheme.primary,
+                  width: 2,
+                ),
+                textStyle: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              icon: const Icon(Icons.accessibility_new_rounded, size: 30),
+              label: const Text(
+                'Opções de acessibilidade',
+                style: TextStyle(fontSize: 22),
+              ),
             ),
           ),
         ],

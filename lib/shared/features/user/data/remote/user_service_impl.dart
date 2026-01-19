@@ -1,8 +1,6 @@
 import 'dart:convert';
 
 import 'package:app_posto/shared/features/user/data/remote/user_service_dao.dart';
-import 'package:app_posto/shared/features/user/domain/entities/user_entity.dart'
-    hide User;
 import 'package:app_posto/shared/features/user/data/models/user.dart';
 import 'package:app_posto/utils/url.dart';
 import 'package:dio/dio.dart';

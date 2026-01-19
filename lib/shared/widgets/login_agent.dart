@@ -75,14 +75,13 @@ class LoginAgent extends StatelessWidget {
         );
       }
 
-      final Agent? registerAgent = await _service
-        .registerAgent(
-          cpf: cpf,
-          name: name,
-          email: email,
-          password: password,
-          agentCode: agentCode,
-        );
+      final Agent? registerAgent = await _service.registerAgent(
+        cpf: cpf,
+        name: name,
+        email: email,
+        password: password,
+        agentCode: agentCode,
+      );
 
       if (registerAgent == null) {
         ScaffoldMessenger.of(
@@ -92,9 +91,9 @@ class LoginAgent extends StatelessWidget {
     }
 
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.white,
         actions: [
           IconButton(
             onPressed: () {
@@ -106,164 +105,129 @@ class LoginAgent extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            SizedBox(height: 30),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      shape: BoxShape.circle,
+                    ),
+                    width: 90,
+                    height: 90,
+                    child: Image.asset('assets/images/logo2.png')
                   ),
-                  width: 90,
-                  height: 90,
-                  child: Icon(Icons.admin_panel_settings, size: 80, color: Colors.black),
+                ],
+              ),
+          
+              SizedBox(height: 40),
+          
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Acesse sua conta',
+                    style: TextStyle(fontSize: 28, color: Colors.black, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+          
+              SizedBox(height: 40),
+          
+              TextFormField(
+                controller: _cpfController,
+                cursorColor: Colors.black,
+                decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.edit_document),
+                  hintText: 'CPF',
+                  helperText: '000.000.000-00',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(9)),
+                  ),
+                  fillColor: Colors.white,
+                  filled: true,
+                  floatingLabelStyle: TextStyle(color: Colors.transparent),
+          
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(9)),
+                  ),
                 ),
-              ],
-            ),
-
-            SizedBox(height: 40),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Preencha suas informações abaixo:',
-                  style: TextStyle(fontSize: 20, color: Colors.white),
-                ),
-              ],
-            ),
-
-            SizedBox(height: 30),
-
-            TextFormField(
-              controller: _cpfController,
-              cursorColor: Colors.black,
-              decoration: InputDecoration(
-                labelText: 'Digite seu CPF',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(13)),
-                ),
-                fillColor: Colors.white,
-                filled: true,
-                floatingLabelStyle: TextStyle(color: Colors.transparent),
-
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(13)),
+          
+                keyboardType: TextInputType.number,
+                onChanged: (value) {
+                  _verifyCpf();
+                },
+              ),
+          
+              SizedBox(height: 40),
+          
+              TextFormField(
+                controller: _nameController,
+                cursorColor: Colors.black,
+                decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.person),
+                  labelText: 'Nome completo',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(9)),
+                  ),
+          
+                  fillColor: Colors.white,
+                  filled: true,
+                  floatingLabelStyle: TextStyle(color: Colors.transparent),
+          
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(9)),
+                  ),
                 ),
               ),
-
-              keyboardType: TextInputType.number,
-              onChanged: (value) {
-                _verifyCpf();
-              },
-            ),
-
-            SizedBox(height: 30),
-
-            TextFormField(
-              controller: _nameController,
-              cursorColor: Colors.black,
-              decoration: InputDecoration(
-                labelText: 'Digite seu nome',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(13)),
-                ),
-
-                fillColor: Colors.white,
-                filled: true,
-                floatingLabelStyle: TextStyle(color: Colors.transparent),
-
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(13)),
+          
+              SizedBox(height: 40),
+          
+              TextFormField(
+                controller: _emailController,
+                cursorColor: Colors.black,
+                decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.key),
+                  labelText: 'Digite seu código de agente',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(9)),
+                  ),
+          
+                  fillColor: Colors.white,
+                  filled: true,
+                  floatingLabelStyle: TextStyle(color: Colors.transparent),
+          
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(9)),
+                  ),
                 ),
               ),
-            ),
-
-            SizedBox(height: 30),
-
-            TextFormField(
-              controller: _emailController,
-              cursorColor: Colors.black,
-              decoration: InputDecoration(
-                labelText: 'Digite seu e-mail',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(13)),
-                ),
-
-                fillColor: Colors.white,
-                filled: true,
-                floatingLabelStyle: TextStyle(color: Colors.transparent),
-
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(13)),
-                ),
-              ),
-            ),
-
-            SizedBox(height: 30,),
-
-            TextFormField(
-              controller: _emailController,
-              cursorColor: Colors.black,
-              decoration: InputDecoration(
-                labelText: 'Digite sua senha',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(13)),
-                ),
-
-                fillColor: Colors.white,
-                filled: true,
-                floatingLabelStyle: TextStyle(color: Colors.transparent),
-
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(13)),
+          
+              SizedBox(height: 80),
+          
+              SizedBox(
+                width: 350,
+                height: 50,
+                child: ElevatedButton.icon(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/userAgent');
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.teal[700],
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadiusGeometry.circular(14),
+                    ),
+                  ),
+                  label: const Text('Entrar', style: TextStyle(fontSize: 22)),
                 ),
               ),
-            ),
-
-            SizedBox(height: 30,),
-
-            TextFormField(
-              controller: _emailController,
-              cursorColor: Colors.black,
-              decoration: InputDecoration(
-                labelText: 'Digite seu código de agente',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(13)),
-                ),
-
-                fillColor: Colors.white,
-                filled: true,
-                floatingLabelStyle: TextStyle(color: Colors.transparent),
-
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(13)),
-                ),
-              ),
-            ),
-
-            SizedBox(height: 40),
-
-            ElevatedButton(
-              onPressed: () {
-                _handleRegister();
-              },
-              child: Text(
-                'Entrar',
-                style: TextStyle(color: Colors.white, fontSize: 18),
-              ),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green,
-                padding: EdgeInsets.symmetric(vertical: 16, horizontal: 80),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(18),
-                ),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

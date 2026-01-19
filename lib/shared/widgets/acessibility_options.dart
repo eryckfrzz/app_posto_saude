@@ -59,6 +59,7 @@ class _AcessibilityOptionsState extends State<AcessibilityOptions> {
                   onChanged: (double value) {
                     setState(() {
                       _fontSize = value;
+                      themeCubit.changeFontSize(value / 20);
                     });
                   },
                 ),
@@ -82,7 +83,7 @@ class _AcessibilityOptionsState extends State<AcessibilityOptions> {
               onChanged: (bool value) {
                 setState(() {
                   _isDarkTheme = value;
-                  themeCubit.changeTheme(value ? 'dark' : 'default');
+                  themeCubit.changeTheme(isDark: value);
                 });
               },
               secondary: Icon(
@@ -95,7 +96,10 @@ class _AcessibilityOptionsState extends State<AcessibilityOptions> {
 
             ElevatedButton(
               onPressed: () => Navigator.pop(context),
-              child: Text('Salvar configurações', style: TextStyle(fontSize: 18, color: Colors.white),),
+              child: Text(
+                'Salvar configurações',
+                style: TextStyle(fontSize: 18, color: Colors.white),
+              ),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green,
                 padding: EdgeInsets.symmetric(vertical: 16, horizontal: 73),

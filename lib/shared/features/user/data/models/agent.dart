@@ -1,6 +1,7 @@
 class Agent {
   String cpf;
   String name;
+  String phone;
   String email;
   String password;
 
@@ -9,10 +10,11 @@ class Agent {
     required this.name,
     required this.email,
     required this.password,
+    required this.phone
   });
 
   Map<String, dynamic> toJson() {
-    return {'cpf': cpf, 'name': name, 'email': email, 'password': password};
+    return {'cpf': cpf, 'name': name, 'email': email, 'password': password, 'phone': phone};
   }
 
   factory Agent.fromJson(Map<String, dynamic> json) {
@@ -21,6 +23,7 @@ class Agent {
       name: json['name'],
       email: json['email'],
       password: json['password'],
+      phone: json['phone'],
     );
   }
 }

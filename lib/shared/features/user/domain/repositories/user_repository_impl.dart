@@ -17,4 +17,9 @@ class UserRepositoryImpl implements UserRepository {
   Future<List<RecordEntity>> getRecordsByUserCpf(String cpf) {
     return databaseDao.getRecordsByUserCpf(cpf);
   }
+
+  @override
+  Future<void> deleteByCpf(String cpf) {
+    return databaseDao.deleteByCpf(cpf);
+  }
 }
